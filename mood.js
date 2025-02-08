@@ -46,10 +46,10 @@ const reasons = [
   
     // Animate reason text (fade-in)
     reasonText.classList.remove('fade-in'); // reset animation
-    void reasonText.offsetWidth;            // reflow hack to restart CSS animation
+    void reasonText.offsetWidth;            // reflow hack to restart
     reasonText.classList.add('fade-in');
   
-    // Create glitters for added whimsy
+    // Create sparkles for added whimsy
     createGlitters(10); // number of sparkles
   });
   
