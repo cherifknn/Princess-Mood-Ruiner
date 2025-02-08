@@ -1,36 +1,17 @@
-/* RESET */
-* {
+/* 1) PAGE SETUP: No scrolling, occupies full screen */
+html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* FLEX LAYOUT FOR STICKY FOOTER */
-  body {
-    display: flex;              /* make the body a flex container */
-    flex-direction: column;     /* stack items vertically */
-    min-height: 100vh;          /* ensure body takes full viewport height */
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* No scrolling, content is clipped if it exceeds 100vh */
     font-family: 'Quicksand', sans-serif;
-    background: #ffe4ef;        /* Light pink background */
+    background: #ffe4ef; /* Light pink */
     color: #333;
     position: relative;
-    overflow-x: hidden;
   }
   
-  /* MAIN CONTENT (flex:1 for sticky footer) */
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 3rem auto;
-    width: 90%;
-    max-width: 700px;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* SPARKLY BACKGROUND OVERLAY (STATIC) */
+  /* 2) BACKGROUND SPARKLES (FIXED) */
   .sparkle-bg {
     position: fixed;
     top: 0;
@@ -46,82 +27,81 @@
     z-index: 0;
   }
   
-  /* HEADER */
+  /* 3) HEADER NEAR THE TOP */
   header {
+    position: absolute;
+    top: 1rem; /* move further down if needed */
+    width: 100%; /* so text can center horizontally */
     text-align: center;
-    margin-top: 2rem;
     z-index: 1;
-    position: relative;
-    padding: 0 1rem;
   }
   
   header h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 4rem;
+    font-size: 3rem;
     color: #ff85b9;
     letter-spacing: 2px;
-    word-wrap: break-word;
+    margin-bottom: 0.5rem;
   }
   
   .subtitle {
     font-size: 1.2rem;
     color: #cc6699;
-    margin-top: 0.5rem;
   }
   
-  /* REASON BOX */
+  /* 4) MAIN CONTENT CENTERED */
+  main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centers main horizontally & vertically */
+    z-index: 1;
+    width: 80%;        /* smaller width than screen */
+    max-width: 600px;  /* limit maximum width */
+    text-align: center;
+  }
+  
+  /* 5) REASON BOX (centrally located) */
   #reason-box {
-    width: 100%;
     background: #fff0f8;
     border: 2px dashed #ffd6e7;
     border-radius: 20px;
-    text-align: center;
     box-shadow: 0 4px 10px rgba(255, 192, 203, 0.2);
-    padding: 2rem;
-    margin: 0 auto 2rem; /* space below before the button */
+    padding: 1.5rem;
   }
   
   #reason-text {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #cc6699;
-    opacity: 1;
     line-height: 1.4;
   }
   
-  /* BUTTON */
+  /* 6) FIXED BUTTON NEAR BOTTOM (NOT AT VERY EDGE) */
   #generate-reason-btn {
+    position: fixed;
+    bottom: 2rem;  /* 2rem from bottom edge */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* above everything else */
     background: linear-gradient(45deg, #ffa7c4, #f8c6ea);
     color: #fff;
     font-weight: 700;
     padding: 1rem 2rem;
     border: none;
     border-radius: 30px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-family: inherit;
     box-shadow: 0 4px 10px rgba(255, 165, 191, 0.5);
     font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
   
+  /* Keep the button horizontally centered on hover */
   #generate-reason-btn:hover {
-    transform: translateY(-3px);
+    transform: translateX(-50%) translateY(-3px);
     box-shadow: 0 6px 15px rgba(255, 165, 191, 0.7);
   }
   
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 1rem 0;
-    position: relative;
-    z-index: 1;
-  }
-  
-  footer p {
-    font-size: 0.9rem;
-    color: #999;
-  }
-  
-  /* FADE-IN ANIMATION for the reason text */
+  /* 7) FADE-IN ANIMATION for the reason text */
   .fade-in {
     animation: fadeInUp 0.6s ease forwards;
   }
@@ -137,7 +117,7 @@
     }
   }
   
-  /* SPARKLE CSS (dynamically added by JS) */
+  /* 8) SPARKLE ANIMATION (via JS) */
   .sparkle {
     position: absolute;
     width: 10px;
@@ -163,56 +143,3 @@
       opacity: 0;
     }
   }
-  
-  /* RESPONSIVE DESIGN */
-  
-  /* TABLETS & BELOW: up to 768px */
-  @media (max-width: 768px) {
-    header h1 {
-      font-size: 3rem;
-    }
-    .subtitle {
-      font-size: 1.1rem;
-    }
-    main {
-      margin: 2rem auto;
-    }
-    #reason-text {
-      font-size: 1.3rem;
-    }
-  }
-  
-  /* PHONES: up to 480px */
-  @media (max-width: 480px) {
-    header h1 {
-      font-size: 2.5rem;
-    }
-    .subtitle {
-      font-size: 1rem;
-    }
-    #reason-box {
-      padding: 1.5rem;
-    }
-    #reason-text {
-      font-size: 1.2rem;
-    }
-  
-    /* Make the button fixed at the bottom of the screen */
-    #generate-reason-btn {
-      position: fixed;
-      bottom: 7rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;        /* ensure the button is on top */
-      font-size: 1rem;
-      padding: 0.8rem 1.5rem;
-    }
-  
-    /* Add bottom padding so the button doesn’t cover the text box */
-    main {
-      padding-bottom: 5rem;
-    }
-  }
-  
-  
-  
