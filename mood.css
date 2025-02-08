@@ -78,7 +78,7 @@
     text-align: center;
     box-shadow: 0 4px 10px rgba(255, 192, 203, 0.2);
     padding: 2rem;
-    margin: 0 auto 2rem; /* extra bottom margin before the button */
+    margin: 0 auto 2rem; /* space below before the button */
   }
   
   #reason-text {
@@ -166,7 +166,7 @@
   
   /* RESPONSIVE DESIGN */
   
-  /* SMALL TABLETS & PHONES: up to 768px */
+  /* TABLETS & BELOW: up to 768px */
   @media (max-width: 768px) {
     header h1 {
       font-size: 3rem;
@@ -196,9 +196,22 @@
     #reason-text {
       font-size: 1.2rem;
     }
+  
+    /* Make the button fixed at the bottom of the screen */
     #generate-reason-btn {
-      font-size: 0.9rem;
+      position: fixed;
+      bottom: 7rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;        /* ensure the button is on top */
+      font-size: 1rem;
       padding: 0.8rem 1.5rem;
     }
+  
+    /* Add bottom padding so the button doesn’t cover the text box */
+    main {
+      padding-bottom: 5rem;
+    }
   }
+  
   
